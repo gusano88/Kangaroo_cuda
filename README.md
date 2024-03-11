@@ -3,6 +3,92 @@
 A Pollard's kangaroo interval ECDLP solver for SECP256K1 (based on VanitySearch engine).\
 **This program is limited to a 125bit interval search.**
 
+# Kanguroo_btc v1
+Pollard's kangaroo interval ECDLP solver for SECP256K1 forked by gusano88
+
+
+# Installation in HIVE OS
+
+
+1. Install NVIDIA and CUDA drivers (you have to accept manually when you install "sh cuda_11.2.2_460.32.03_linux.run", and only select cuda tooltik, not driver).
+
+```
+wget https://developer.download.nvidia.com/compute/cuda/11.2.2/local_installers/cuda_11.2.2_460.32.03_linux.run
+sh cuda_11.2.2_460.32.03_linux.run
+```
+![accept](https://github.com/gusano88/Kanguroo_btc/assets/86485836/d59498c9-5efd-4861-8dd9-fc4a0a8970df)
+![isntall](https://github.com/gusano88/Kanguroo_btc/assets/86485836/4c7ecd4c-1db1-451c-b4e3-0e25b232d768)
+
+3. Update and Upgrade
+```
+apt update && apt upgrade -y
+```
+4. Download this GitHub repository
+```
+mkdir btc
+cd btc
+git clone https://github.com/gusano88/Kangaroo_cuda.git
+```
+5. Open /Kangaroo_cuda folder
+```
+cd Kangaroo_cuda
+```
+6. Compile the code with the specific ccap in cuda of the gpu used.
+```
+make gpu=0,1,2,3,4,5 ccap=86 all 
+```
+If outputs error after running the code below, one or more gpus are not working properly. It's set for 6 gpus.
+
+7. Installation succesfully done; Start the code
+```
+./kangaroo -gpu in.txt 
+```
+
+# Installation in RUNPOD docker container "nvidia/cuda:11.2.2-cudnn8-devel-ubuntu18.04"
+
+1. Update and Upgrade
+```
+apt update && apt upgrade -y
+```
+2. Install nano and git
+```
+apt-get install nano && apt-get install git -y
+```
+3. Download this GitHub repository
+```
+mkdir btc
+cd btc
+git clone https://github.com/gusano88/Kangaroo_cuda.git
+```
+4. Open /Kangaroo_cuda folder
+```
+cd Kangaroo_cuda
+```
+5. Compile the code with the specific ccap in cuda of the gpu used.
+```
+make gpu=0,1,2,3,4,5 ccap=86 all 
+```
+If outputs error after running the code below, one or more gpus are not working properly. It's set for 6 gpus.
+
+6. Installation succesfully done; Start the code
+```
+./kangaroo -gpu in.txt 
+```
+
+# Distributed attack 
+
+Start the master with the next command in terminal:
+```
+./kangaroo -gpu -w save.work -wi 3000 -o result.txt -s -d in.txt
+./kangaroo -gpu in.txt 
+```
+In this case we are starting our master with backup every 5 min, 12 distinguished bits, and in.txt as the config file.
+
+
+
+
+
+
 # Feature
 
 <ul>
